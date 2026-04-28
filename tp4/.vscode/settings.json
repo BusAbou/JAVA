@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "test",
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "/home/mamadou/Bureau/Ulille/POO/mamadou_baillo_sow_g6_poo_25/tp4/junit-console.jar"
+    ]
+}
