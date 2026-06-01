@@ -1,17 +1,26 @@
-# TP8 Jeu de la l'oie
+# TP8 — Jeu de l'Oie
 
-## Etudiants
+**Réalisé par :** Aboubacrin Simpara  
+**Établissement :** Université de Lille
 
--
+---
 
-## Objectifs
+## Présentation
 
-### Ojectifs atteints
+Ce TP consiste à programmer le **jeu de l'oie** en Java. Plusieurs joueurs se déplacent sur un plateau de cases en lançant deux dés à chaque tour, et le premier à atteindre la dernière case gagne.
 
-- Utilisation de l'heritage
-- Conception et developpement du jeu
-- La classe abstraite Cell a été créé afin de pouvoir créer des classes Cell filles ayant la meme structure mais pas forcément tous les méme methodes
-- La classe abstraite Board a aussi été créee pour la meme raison. Comme dit dans le sujet on voulait pouvoir créer d'autres types de plateau si possible ayant des comportement différents du premier, le choix d'une classe abstraite Board reproduitant déja la structure s'est ainsi fait.
+Le cœur du projet repose sur l'utilisation des **classes abstraites** et de l'**héritage** :
+
+- `Cell` est une classe abstraite qui définit le comportement commun de toutes les cases. Cinq types de cases en héritent, chacune avec un comportement différent :
+  - **`NormalCell`** : case ordinaire, le joueur avance normalement.
+  - **`GooseCell`** (case de l'oie) : le joueur rejoue d'autant de cases qu'il vient d'en parcourir.
+  - **`TrapCell`** (prison) : le joueur est bloqué et ne peut pas bouger au prochain tour.
+  - **`WaitCell`** : le joueur doit attendre un tour.
+  - **`TeleportationCell`** : le joueur est téléporté directement vers une autre case cible.
+
+- `Board` est aussi abstraite pour permettre de créer différents types de plateaux. `ClassicalBoard` est le plateau classique du jeu de l'oie.
+
+Si deux joueurs se retrouvent sur la même case, ils échangent leurs positions. La partie continue jusqu'à ce qu'un joueur atteigne exactement la dernière case.
 
 ### Arborescence du projet
 .

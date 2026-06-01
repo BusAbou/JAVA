@@ -19,16 +19,11 @@ Parmi les opérations que l'on peut effectuer sur une image :
 
 Lorsqu'on accède à un pixel aux coordonnées invalides, une exception personnalisée `UnknownPixelException` est lancée.
 
-### Objectives Achieved
+---
 
-This practical work requires implementing different objects in order to be able to manipulate images.
+## Commandes utiles
 
-using interfaces to avoid duplicating code, manipulating pixels on a given set of images...
-
-The pixel class is a separate object that instantiates a grey color, with accessors, a setter, and an equals method that compares two pixels...
-
-
-## How to generate documentation ?
+### Générer la documentation
 Command to use for generating the documentation. You will need to go to the tp6/ folder
 
 ```bash
