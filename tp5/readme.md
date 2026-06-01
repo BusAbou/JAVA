@@ -1,22 +1,19 @@
-# TP5 - Bataille Navale
+# TP5 — Bataille Navale
 
-## Author 
+**Réalisé par :** Aboubacrin Simpara  
+**Établissement :** Université de Lille
 
+---
 
-## Goals 
+## Présentation
 
-### objectives achieved
+Ce TP consiste à programmer un jeu de bataille navale complet en Java. L'idée est simple : on dispose d'un plateau avec une grille de cases, on y place des bateaux, et le joueur tire des coups en entrant des coordonnées jusqu'à ce que tous les bateaux soient coulés.
 
-This assignment is due to a lack of computer equipment.
+Pour y arriver, nous avons conçu plusieurs classes qui travaillent ensemble : le plateau (`Board`), les cases (`Cell`), les bateaux (`Ship`), et la boucle de jeu (`Game`). Deux énumérations viennent compléter le tout — une pour l'orientation des bateaux (`HORIZONTAL` ou `VERTICAL`), et une autre pour le résultat de chaque tir (`HIT`, `MISSED`, `SUNK`).
 
-The objective was to program a naval battle game, with various details outlined in the specifications.
+Quand le joueur tire sur une case invalide (hors du plateau), une exception personnalisée `InvalidPositionException` est lancée.
 
-There were different classes to program, with tests, documentation for each method...
-The main objective was to provide a functional program with zero warnings or any errors.
-
-The game works in such a way that, when the board is instantiated, it is provided with a length and a width for the construction of the game board. On this board you can place a boat with a variable orientation and square position.
-
-Once a ship is placed on the board, you can shoot until all the ships sink, ending the game.
+La partie se termine automatiquement quand tous les bateaux ont été coulés, et le nombre total de tirs est affiché.
 
 ## How to generate documentation ?
 
