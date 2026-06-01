@@ -1,61 +1,100 @@
-# TP4 - VLille
+# TP4 — Exceptions, Enums, Packages et Tests unitaires
 
-## Author 
+**Réalisé par :** Aboubacrin Simpara  
+**Établissement :** Université de Lille
 
-- SOW Mamadou Baïllo
+---
 
-## Goals 
+## Présentation
 
-### objectives achieved
+Ce TP modélise un système de vélos en libre-service inspiré du **V'Lille**. On y gère des vélos et des stations de dépôt/retrait, en introduisant des notions avancées comme les packages, les énumérations, les exceptions personnalisées et les tests unitaires avec JUnit 5.
 
-This practical work involves managing a bicycle rental station (Vlille). A Bike object allowing
-retrieval of a bike's characteristics via methods and a constructor. A BikeStation class that
-represents the bike station, with a constructor that takes the station name and its capacity as parameters.
+---
 
-For each method, Javadocs had to be written, and some unit tests were added to the existing ones.
-A main program BikeMain was created to display the description of a bike, A second main
-BikeStationMain was also created, which instantiates two Bike objects and a BikeStation station. The main BikeStation program takes a command line argument.
+## Structure du projet
 
-## How to generate documentation ?
-
-Command to use for generating the documentation. You will need to go to the tp4/ folder
-
-```bash
-javadoc -sourcepath src -subpackages vlille -d docs
+```
+tp4/
+├── src/
+│   └── vlille/
+│       ├── Bike.java                       # Classe représentant un vélo
+│       ├── BikeStation.java                # Classe représentant une station
+│       ├── BikeNotAvailableException.java  # Exception personnalisée
+│       ├── BikeMain.java                   # Programme : créer un vélo
+│       ├── BikeStationMain.java            # Programme : gérer une station
+│       └── util/
+│           └── BikeModel.java              # Enum des modèles de vélos
+└── test/
+    └── vlille/
+        ├── BikeTest.java                   # Tests unitaires de Bike
+        ├── BikeSecondTest.java             # Tests complémentaires
+        └── BikeStationTest.java            # Tests unitaires de BikeStation
 ```
 
-## How to compile the project classes?
+---
+
+## Les classes principales
+
+### `BikeModel` — l'énumération des modèles
+
+Un vélo peut être de trois types : **CLASSIC** (mécanique), **ELECTRIC** (à assistance électrique) ou **TANDEM** (deux places). Ces valeurs sont définies dans une énumération Java (`enum`).
+
+---
+
+### `Bike` — le vélo
+
+Chaque vélo est identifié par un identifiant unique (`id`), un modèle (`BikeModel`) et une couleur (rouge par défaut). Deux vélos sont considérés égaux si et seulement si ils ont le même identifiant, peu importe leur modèle ou couleur.
+
+Le prix de location est une constante de classe : `RENTAL_PRICE = 100`.
+
+---
+
+### `BikeStation` — la station
+
+Une station possède un nom, une capacité fixe (nombre de slots) et un tableau de vélos. Au départ, elle est vide.
+
+Les opérations possibles sont :
+
+- **Déposer un vélo** (`dropBike`) : place le vélo dans le premier emplacement libre. Retourne `false` si la station est pleine.
+- **Retirer un vélo** (`takeBike`) : récupère le vélo à un emplacement donné. Lance une exception si l'emplacement est invalide ou vide.
+- **Premier emplacement libre** (`firstFreeSlot`) : retourne l'index du premier slot libre, ou `-1` si la station est pleine.
+
+---
+
+### `BikeNotAvailableException` — l'exception personnalisée
+
+Cette exception est lancée lorsqu'on essaie de prendre un vélo à un emplacement vide ou avec un index invalide (négatif ou trop grand). C'est une exception dite **vérifiée** (`checked exception`), ce qui oblige le code appelant à la gérer avec `try/catch`.
+
+---
+
+## Les programmes principaux
+
+**`BikeMain`** : crée simplement un vélo électrique et affiche sa description.
+
+**`BikeStationMain`** : prend un numéro de slot en argument et tente de récupérer le vélo qui s'y trouve.
 
 ```bash
-javac -sourcepath src src/vlille/*.java -d classes
+java -classpath classes vlille.BikeStationMain 0   # prend le vélo au slot 0
+java -classpath classes vlille.BikeStationMain 5   # slot invalide → message d'erreur
 ```
 
-## How to compile the tests?
+---
 
-```bash
-javac -classpath junit-console.jar:classes test/vlille/*.java
-```
+## Tests unitaires (JUnit 5)
 
-## How to run the tests?
+Les tests vérifient le comportement de `Bike` et `BikeStation` dans tous les cas :
 
-```bash
-java -jar junit-console.jar -classpath test:classes -scan-classpath
-```
+- L'état initial d'une station (0 vélos, capacité correcte)
+- Le dépôt et le retrait de vélos avec mise à jour du compteur
+- Le premier slot libre après ajout/retrait
+- Le lancement de `BikeNotAvailableException` pour un slot vide, négatif ou trop grand
+- L'égalité entre vélos basée uniquement sur l'identifiant
 
-## How to create the executable jar?
+---
 
-```bash
-jar cfe BikeStationMain.jar vlille.BikeStationMain -C classes/ .
-```
-## How to test program execution?
+## Ce que ce TP nous a appris
 
-```bash
-java -classpath classes vlille.BikeMain
-java -classpath classes vlille.BikeStationMain 12
-```
-
-## And for a jar if requested
-
-```bash
-java -jar BikeStationMain.jar 12
-```
+- Organiser son code en **packages** (`vlille`, `vlille.util`)
+- Utiliser les **énumérations** (`enum`) pour représenter des valeurs fixes
+- Créer et utiliser une **exception personnalisée** (`checked exception`)
+- Écrire des **tests unitaires** avec JUnit 5 (`@Test`, `assertEquals`, `assertThrows`, `assertSame`)

@@ -2,9 +2,7 @@
 
 ## Etudiants
 
-- BELYAEV Igor
-- SAVI kamal-Deen Oloumide
-- SOW Mamadou Baïllo
+-
 
 ## Objectifs
 
