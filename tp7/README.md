@@ -1,18 +1,22 @@
-# TP7 Rental agency
+# TP7 — Agence de Location de Véhicules
 
-## Author
+**Réalisé par :** Aboubacrin Simpara  
+**Établissement :** Université de Lille
 
+---
 
-## Goal
+## Présentation
 
-### Objectives Achieved
-This preparatory work allows us to highlight inheritance with different classes, with an interface that avoids duplicating code.
+Ce TP modélise une agence de location de véhicules. On y manipule des véhicules (voitures et motos), des clients, et une agence qui gère les locations. C'est aussi l'occasion de mettre en pratique l'**héritage**, les **interfaces**, les **collections Java** (`List`, `Map`) et les **filtres**.
 
-We're dealing with a rental agency with various objects: vehicles, clients, the agency itself, etc. We can add vehicles to our agency, create a client, and have them rent a vehicle. It's possible to display all the agency's content and check if a vehicle is rented or if a client has rented a vehicle.
+L'agence permet d'ajouter ou supprimer des véhicules, de louer un véhicule à un client et de le retourner. On peut aussi filtrer les véhicules selon différents critères (marque, prix maximum, début de marque...) et afficher la sélection.
 
-On this rental agency it is possible to apply filters by: brand, model, production year, daily price rental and then display this selection list.
+Deux variantes de l'agence ont été créées par héritage :
 
-Two classes, SuspiciousRentalAgency and FriendlyRentalAgency, which inherit from RentalAgency, perform a somewhat special function, notably overloading the rentVehicle method according to rental conditions.
+- **`SuspiciousRentalAgency`** : applique une majoration de 10% sur le prix pour les clients de moins de 25 ans.
+- **`FriendlyRentalAgency`** : accumule des points de fidélité pour chaque location. Au-delà d'un seuil, le client bénéficie d'une réduction.
+
+Pour les filtres, une interface `VehicleFilter` définit un contrat simple : la méthode `accept(Vehicle v)`. Chaque filtre concret l'implémente différemment (`BrandFilter`, `MaxPriceFilter`, `BrandBeginByFilter`). Le filtre `AndFilter` combine plusieurs filtres ensemble.
 
 ## How to generate documentation ?
 Command to use for generating the documentation. You will need to go to the tp6/ folder
